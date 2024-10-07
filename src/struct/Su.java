@@ -80,21 +80,17 @@ public class Su {
 
     public boolean isRowColValueValid(int[][] su,int row,int col, int num){
 
+        int one_cell_row = row - row % 3;
+        int one_cell_col = col - col % 3;
         for(int x=0;x<9;x++){
             if(su[row][x] == num || su[x][col] == num){ // checking the whole row and column
                 return false;
             }
-        }
-
-        int one_cell_row = row - row % 3;
-        int one_cell_col = col - col % 3;
-
-        // check and assign num in 3x3 grid
-        for(i=0;i<3;i++){
-            for(j=0;j<3;j++){
-                if(su[i+one_cell_row][j+one_cell_col] == num){
-                    return false; // check in the cell that is (0,0),(0,1),(0,2) and compare with num
-                }
+            int gridRow = one_cell_row + x/3;
+            int gridCol = one_cell_col + x%3;
+    
+            if(su[gridRow][gridCol] == num){
+                return false; // check in the cell that is (0,0),(0,1),(0,2) and compare with num
             }
         }
         return true;
